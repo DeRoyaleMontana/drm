@@ -121,7 +121,7 @@ export default function Stay() {
   }, { scope: sectionRef });
 
   return (
-    <div ref={sectionRef} className="relative h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
+    <div ref={sectionRef} className="relative h-svh md:h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
       {/*  overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-black/90 to-black/80"></div>
       {/* End of  overlay */}
