@@ -121,7 +121,7 @@ export default function Stay() {
   }, { scope: sectionRef });
 
   return (
-    <div ref={sectionRef} className="relative h-svh md:h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
+    <div ref={sectionRef} className="relative h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
       {/*  overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-black/90 to-black/80"></div>
       {/* End of  overlay */}
@@ -130,7 +130,7 @@ export default function Stay() {
       <div className="relative w-full h-[65%] mlg:h-[75%] md:h-[80%] xl:h-full z-10 flex flex-col justify-center gap-y-16 md:gap-y-18 2xl:gap-y-24 3xl:gap-y-27">
         <h2 className="f-h2 font-display tracking-wider text-ivory">Your stay at Montana includes</h2>
 
-        <div ref={containerRef} className="flex w-full h-full gap-x-10 md:gap-x-16 justify-start items-center uppercase pl-3 pr-20">
+        <div ref={containerRef} className="flex w-full h-full gap-x-10 md:gap-x-16 justify-start items-center uppercase pl-3 pr-20 will-change-transform">
           {stayIncludes.map((stayItem, index) => (
             <div
               key={index}
