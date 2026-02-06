@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-display: var(--font-instrument-serif);
+  --font-body: var(--font-inter);
+
+  --text-xxs: 0.625rem;
+
+  --color-primary: #182B21;
+  --color-accent: #AF8D57;
+  --color-secondary: #FFFBF4;
+  --color-ivory: #ffffe3;
+  --color-text: #151515;
+
+  /* Custom Breakpoints */
+  --breakpoint-msm: 20rem;
+  --breakpoint-mmd: 23.4375rem;
+  --breakpoint-mlg: 26.5625rem;
+  --breakpoint-2xl: 90rem;
+  --breakpoint-3xl: 120rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-secondary text-text antialiased;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+}
+
+
+@layer utilities {
+  .max-container {
+    max-width: var(--breakpoint-3xl);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Padding Utilities */
+@utility fpt {
+  padding-top: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+}
+
+@utility fpb {
+  padding-bottom: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+}
+
+@utility fpy {
+  padding-top: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+  padding-bottom: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+}
+
+@utility fpr {
+  padding-right: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+}
+
+@utility fpl {
+  padding-left: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+}
+
+@utility fpx {
+  padding-left: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+  padding-right: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+}
+
+@utility fp {
+  padding-top: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+  padding-bottom: clamp(2.5rem, 2.0736rem + 1.6054vw, 4rem);
+  padding-left: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+  padding-right: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
+}
+
+@utility f-h1 {
+  @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 3xl:text-8xl;
+}
+
+@utility f-h2 {
+  @apply text-2xl mlg:text-3xl sm:text-4xl lg:text-[45px] 2xl:text-5xl 3xl:text-6xl
+}
+
+@utility f-h3 {
+  @apply text-lg mmd:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[38px] 2xl:text-[45px] 3xl:text-6xl;
+}
+
+@utility f-h4 {
+  @apply text-lg mlg:text-xl 2xl:text-2xl 3xl:text-3xl;
+}
+
+@utility f-sm {
+  @apply text-xs mmd:text-sm sm:text-base lg:text-lg 3xl:text-xl;
+}
+
+@utility f-body {
+  @apply text-sm md:text-base 2xl:text-lg 3xl:text-2xl;
+}
+
+
+@utility overlay-gradient {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0)_0%, rgba(0, 0, 0, 0.4)_100%);
+  z-index: 0;
+}
+
+@utility scroll-circle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: moveDown 2s ease-in-out infinite;
+}
+
+@keyframes moveDown {
+  0% {
+    top: 15%;
+    opacity: 1;
+  }
+
+  50% {
+    top: 70%;
+    opacity: 0.3;
+  }
+
+  100% {
+    top: 15%;
+    opacity: 1;
+  }
+}
+
+@utility smooth-content {
+  will-change: transform;
 }
