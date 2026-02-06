@@ -1,32 +1,52 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
+import Lenis from "@studio-freight/lenis";
 import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-    const mainRef = useRef<HTMLDivElement>(null);
-    const smootherRef = useRef<HTMLDivElement>(null);
+    const lenisRef = useRef<Lenis | null>(null);
 
-    useGSAP(() => {
-        ScrollSmoother.create({
-            wrapper: mainRef.current,
-            content: smootherRef.current,
-            smooth: 1.5, // Scroll speed/smoothing duration (seconds)
-            effects: true, // Allow data-speed and data-lag effects
-            smoothTouch: 0, // Disable smoothing on touch devices (native scroll is better)
+    useGSAP(() => { // Changed useEffect to useGSAP
+        const lenis = new Lenis({
+            duration: 1.6, // Increased for smoother, floatier scroll
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            touchMultiplier: 2,
+            orientation: 'vertical', // Added orientation
+            gestureOrientation: 'vertical', // Optimize for vertical scroll, letting native horizontal scroll work better
         });
-    }, { scope: mainRef });
+
+        lenisRef.current = lenis;
+
+        // Sync Lenis scroll with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // Connect GSAP Ticker to Lenis
+        // This makes sure animations are perfectly synced with scroll
+        const update = (time: number) => {
+            lenis.raf(time * 1000);
+        };
+
+        gsap.ticker.add(update);
+
+        // Disable lag smoothing in GSAP to prevent jumps during heavy scrolls
+        gsap.ticker.lagSmoothing(0);
+
+        // Cleanup
+        return () => {
+            gsap.ticker.remove(update);
+            lenis.destroy();
+        };
+    }); // Removed dependency array as useGSAP doesn't use it in this context
 
     return (
-        <div id="smooth-wrapper" ref={mainRef}>
-            <div id="smooth-content" ref={smootherRef}>
-                {children}
-            </div>
+        <div id="smooth-wrapper">
+            {children}
         </div>
     );
 }
