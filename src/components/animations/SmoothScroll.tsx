@@ -18,7 +18,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             content: smootherRef.current,
             smooth: 1.5, // Scroll speed/smoothing duration (seconds)
             effects: true, // Allow data-speed and data-lag effects
-            smoothTouch: 0.5, // Disable smoothing on touch devices (native scroll is better)
+            smoothTouch: 0.2, // Disable smoothing on touch devices (native scroll is better)
         });
     }, { scope: mainRef });
 
