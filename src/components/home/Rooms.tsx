@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { PeopleIcon } from "../icons";
 import Carousel from "@/components/ui/Carousel";
@@ -34,10 +35,15 @@ const rooms = [
 const RoomCard = ({ room, className = "" }: { room: typeof rooms[0], className?: string }) => (
     <div className={`group hover:cursor-pointer overflow-hidden relative w-full h-[250px] mlg:h-[350px] lg:h-[450px] 2xl:h-[550px] 3xl:h-[720px] ${className}`}>
         {/* Background Image */}
-        <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-110"
-            style={{ backgroundImage: `url('${room.image}')` }}
-        ></div>
+        <div className="absolute inset-0">
+            <Image
+                src={room.image}
+                alt={room.title}
+                fill
+                className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+                sizes="(max-width: 768px) 100vw, 50vw"
+            />
+        </div>
 
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-linear-to-b from-transparent to-black pointer-events-none"></div>

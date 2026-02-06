@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/animations/SmoothScroll";
-import Footer2 from "@/components/Footer2";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -32,11 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${instrumentSerif.variable} ${inter.variable}`}>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <SmoothScroll>
           <Header />
           {children}
-          <Footer2 />
+          <Footer />
         </SmoothScroll>
       </body>
     </html>

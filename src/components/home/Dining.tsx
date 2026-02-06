@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import ScrollZoomImage from "@/components/animations/ScrollZoomImage";
 
 const data = [
@@ -26,10 +27,16 @@ export default function Dining() {
           className={`w-full h-auto mlg:h-[400px] sm:w-4/5 lg:w-full sm:h-[490px] md:h-[600px] lg:h-[590px] xl:h-[600px] 3xl:h-[800px] relative p-5 mlg:p-6 sm:p-8 md:p-10 3xl:p-12 rounded-t-full overflow-hidden group hover:cursor-pointer ${index === 1 ? 'lg:mt-16 xl:mt-32' : ''}`}
         >
           {/* Background image that will zoom */}
-          <div className="absolute inset-0 bg-sky-100  bg-cover bg-center rounded-t-full" style={{ backgroundImage: `url('${diningItem.image}')` }}>
+          <div className="absolute inset-0 rounded-t-full overflow-hidden">
+            <Image
+              src={diningItem.image}
+              alt={diningItem.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black rounded-t-full"></div>
-            {/* End of Gradient overlay */}
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-black rounded-t-full z-10"></div>
           </div>
           {/* Content - positioned above the zoomed background */}
           <div className="border border-transparent group-hover:border-accent w-full h-full p-5 mlg:p-6 sm:p-8 md:p-10 3xl:p-12 rounded-t-full z-10 relative transition-all ">

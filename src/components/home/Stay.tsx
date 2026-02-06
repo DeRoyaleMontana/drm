@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 
 const stayIncludes = [
   {
@@ -121,7 +122,7 @@ export default function Stay() {
   }, { scope: sectionRef });
 
   return (
-    <div ref={sectionRef} className="relative h-dvh md:h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
+    <div ref={sectionRef} className="relative h-screen w-full flex flex-col justify-center  fpl fpy bg-[url('/images/home/stay-bg.webp')] bg-cover bg-center overflow-hidden">
       {/*  overlay */}
       <div className="absolute inset-0 bg-linear-to-t from-black/90 to-black/80"></div>
       {/* End of  overlay */}
@@ -130,18 +131,26 @@ export default function Stay() {
       <div className="relative w-full h-[65%] mlg:h-[75%] md:h-[80%] xl:h-full z-10 flex flex-col justify-center gap-y-16 md:gap-y-18 2xl:gap-y-24 3xl:gap-y-27">
         <h2 className="f-h2 font-display tracking-wider text-ivory">Your stay at Montana includes</h2>
 
+
         <div ref={containerRef} className="flex w-full h-full gap-x-10 md:gap-x-16 justify-start items-center uppercase pl-3 pr-20 will-change-transform">
           {stayIncludes.map((stayItem, index) => (
             <div
               key={index}
-              className={`relative shrink-0 bg-cover bg-center ${stayItem.type === "tall"
+              className={`relative shrink-0 ${stayItem.type === "tall"
                 ? "w-[70vw] h-full sm:w-[40vw] md:w-[35vw] lg:w-[25vw]"
                 : "w-[75vw] h-[50%] mlg:w-[70vw] sm:w-[50vw] md:w-[40vw] lg:w-[35vw] xl:w-[30vw] 2xl:w-[30vw] 3xl:h-[60%] 3xl:w-[35vw]"
                 }`}
-              style={{ backgroundImage: `url('${stayItem.image}')` }}
             >
+              <Image
+                src={stayItem.image}
+                alt={stayItem.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 75vw, 35vw"
+              />
+              <div className="absolute inset-0 bg-black/20"></div> {/* Optional overlay for text readability */}
               <h4
-                className={`f-h4 font-body absolute ${stayItem.textColor} ${stayItem.type === "tall"
+                className={`f-h4 font-body absolute z-10 ${stayItem.textColor} ${stayItem.type === "tall"
                   ? "-rotate-90 bottom-5 left-3 lg:left-3.5 2xl:left-4 origin-bottom-left whitespace-nowrap"
                   : "bottom-0 left-5 origin-bottom-left translate-y-1/2 text-nowrap"
                   }`}

@@ -120,18 +120,32 @@ export default function Sanctuary() {
         {/* Beyond Limits */}
         <div
           ref={beyondRef}
-          className="relative xl:absolute right-0 top-0 w-[85%] h-[304px] sm:w-[45%] md:w-full xl:w-[20%] 3xl:w-[330px] 3xl:h-[400px] bg-[url('/images/home/beyond-limits.webp')] bg-cover bg-center z-0 md:col-span-1  order-2"
+          className="relative xl:absolute right-0 top-0 w-[85%] h-[304px] sm:w-[45%] md:w-full xl:w-[20%] 3xl:w-[330px] 3xl:h-[400px] z-0 md:col-span-1  order-2"
         >
-          <h4 className="-rotate-90 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 font-body f-h4 tracking-wider text-ivory text-nowrap uppercase">Beyond Limits</h4>
+          <Image
+            src='/images/home/beyond-limits.webp'
+            alt="Beyond Limits"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 20vw"
+          />
+          <h4 className="z-10 -rotate-90 absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 font-body f-h4 tracking-wider text-ivory text-nowrap uppercase">Beyond Limits</h4>
         </div>
         {/* End of Beyond Limits */}
 
         {/* True Perfection */}
         <div
           ref={perfectionRef}
-          className="relative xl:absolute left-0 bottom-0 w-[85%] h-[184px] sm:w-[55%] md:w-full xl:w-[20%] 3xl:w-[334px] 3xl:h-[250px] bg-[url('/images/home/true-perfection.webp')] bg-cover bg-center z-0 order-4 md:order-3"
+          className="relative xl:absolute left-0 bottom-0 w-[85%] h-[184px] sm:w-[55%] md:w-full xl:w-[20%] 3xl:w-[334px] 3xl:h-[250px] z-0 order-4 md:order-3"
         >
-          <h4 className="f-md 2xl:f-md absolute bottom-0 left-0 translate-x-1/4 3xl:translate-x-1/2 translate-y-1/2 font-body f-h4 tracking-wider text-ivory  text-nowrap uppercase">True Perfection</h4>
+          <Image
+            src='/images/home/true-perfection.webp'
+            alt="True Perfection"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 20vw"
+          />
+          <h4 className="z-10 f-md 2xl:f-md absolute bottom-0 left-0 translate-x-1/4 3xl:translate-x-1/2 translate-y-1/2 font-body f-h4 tracking-wider text-ivory  text-nowrap uppercase">True Perfection</h4>
         </div>
         {/* End of True Perfection */}
 

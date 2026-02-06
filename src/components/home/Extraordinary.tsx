@@ -2,6 +2,7 @@
 
 import Button from "../ui/Button";
 import Carousel from "@/components/ui/Carousel";
+import Image from "next/image";
 
 export default function Extraordinary() {
   // Card component for temple/place cards
@@ -13,16 +14,24 @@ export default function Extraordinary() {
     bgImage?: string;
   }) => (
     <div
-      className="relative flex flex-col justify-end items-start h-[360px] md:h-[420px] xl:h-[500px] 3xl:h-[600px] p-5 md:p-9 bg-cover bg-center shrink-0 w-full group hover:cursor-pointer overflow-hidden"
+      className="relative flex flex-col justify-end items-start h-[360px] md:h-[420px] xl:h-[500px] 3xl:h-[600px] p-5 md:p-9 shrink-0 w-full group hover:cursor-pointer overflow-hidden"
     >
 
-      <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-110" style={{ backgroundImage: `url('${bgImage}')` }}></div>
+      <div className="absolute inset-0 transition-transform duration-700 ease-in-out group-hover:scale-110">
+        <Image
+          src={bgImage}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-transparent to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-transparent to-black pointer-events-none"></div>
       {/* End of Gradient overlay */}
 
       {/* Content */}
-      <div className="relative w-full h-full flex items-end justify-start">
+      <div className="relative w-full h-full flex items-end justify-start z-10">
         <h4 className="f-h4 font-body text-ivory leading-relaxed  pl-5 md:pl:8 border-l-4 border-accent absolute bottom-3 left-10 mlg:left-12 mlg:bottom-5 sm:bottom-3 md:left-10 md:bottom-0 2xl:left-12 2xl:bottom-5 3xl:left-17 origin-bottom-left transform -rotate-90 whitespace-nowrap">
           {title}
         </h4>

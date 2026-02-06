@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -13,7 +13,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     useGSAP(() => { // Changed useEffect to useGSAP
         const lenis = new Lenis({
-            duration: 1.6, // Increased for smoother, floatier scroll
+            duration: 2, // Increased for smoother, floatier scroll
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
             touchMultiplier: 2,
@@ -36,6 +36,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
         // Disable lag smoothing in GSAP to prevent jumps during heavy scrolls
         gsap.ticker.lagSmoothing(0);
+
+        // Refresh ScrollTrigger to ensure start/end positions are correct after Lenis init
+        ScrollTrigger.refresh();
 
         // Cleanup
         return () => {

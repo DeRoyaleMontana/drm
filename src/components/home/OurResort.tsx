@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import Carousel from "@/components/ui/Carousel";
 import { ResortIcon } from "@/components/icons";
 import { SvgColorProps } from "@/utils/svgColor";
+import Image from "next/image";
 
 interface SecondProps extends SvgColorProps { }
 
@@ -64,15 +65,20 @@ export default function OurResort({ svgColor = "accent" }: SecondProps) {
     bgImage?: string;
   }) => (
     <div
-      className="relative flex flex-col justify-end items-center h-[240px] lg:h-[240px] xl:h-[300px] 3xl:h-[460px] p-6 bg-cover bg-center border-l-4 border-b-4 border-accent shrink-0 w-full group hover:cursor-pointer overflow-hidden" >
+      className="relative flex flex-col justify-end items-center h-[240px] lg:h-[240px] xl:h-[300px] 3xl:h-[460px] p-6 shrink-0 w-full group hover:cursor-pointer overflow-hidden border-l-4 border-b-4 border-accent" >
 
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-in-out group-hover:scale-110"
-        style={{ backgroundImage: `url('${bgImage}')` }}
-      ></div>
+      <div className="absolute inset-0 transition-transform duration-700 ease-in-out group-hover:scale-110">
+        <Image
+          src={bgImage}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+      </div>
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-b from-transparent to-black"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-transparent to-black pointer-events-none"></div>
       {/* Content */}
       <div className="relative w-full z-10 flex flex-col items-center gap-y-4 2xl:gap-y-6 text-ivory font-body font-light">
         <div className="h-px w-[30%] 3xl:w-[25%] mlg:w- bg-accent"></div>
