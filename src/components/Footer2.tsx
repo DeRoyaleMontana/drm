@@ -128,7 +128,7 @@ export default function Footer() {
                         {/* Mobile Address */}
                         <div className="flex xl:hidden flex-col gap-y-4 ">
                             {contact.map((item, index) => (
-                                <div className="flex items-center gap-x-4">
+                                <div key={index} className="flex items-center gap-x-4">
                                     <div className="w-6 h-6 shrink-0 bg-ivory rounded-full"></div>
                                     <div className={`uppercase  ${index === 2 ? "text-ivory" : "text-accent"}`}>{item.title}</div>
                                 </div>
