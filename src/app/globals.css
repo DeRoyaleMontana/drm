@@ -22,6 +22,7 @@
 }
 
 @layer base {
+
   body {
     @apply bg-secondary text-text antialiased;
     font-family: var(--font-body), sans-serif;
