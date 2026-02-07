@@ -77,12 +77,17 @@
   padding-right: clamp(1.25rem, -0.1003rem + 5.0836vw, 6rem);
 }
 
+@utility fbpy {
+  padding-top: clamp(8rem, 6.4rem + 8vw, 16rem);
+  padding-bottom: clamp(4rem, 3.2rem + 4vw, 8rem);
+}
+
 @utility f-h1 {
   @apply text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 3xl:text-8xl;
 }
 
 @utility f-h2 {
-  @apply text-2xl mlg:text-3xl sm:text-4xl lg:text-[45px] 2xl:text-5xl 3xl:text-6xl
+  @apply text-2xl mlg:text-3xl sm:text-4xl lg:text-[45px] 2xl:text-5xl 3xl:text-6xl;
 }
 
 @utility f-h3 {

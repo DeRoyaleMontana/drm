@@ -113,9 +113,10 @@ export default function OurResort({ svgColor = "accent" }: SecondProps) {
           gap={20}
           slidesPerView={{
             mobile: 1.2,
-            small: 2,
-            tablet: 2,
-            desktop: 3,
+            sm: 2,
+            md: 2,
+            lg: 3,
+            '2xl': 3,
           }}
         >
           <Card

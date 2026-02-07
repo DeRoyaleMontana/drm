@@ -159,9 +159,10 @@ export default function Rooms2() {
                     gap={20}
                     slidesPerView={{
                         mobile: 1,
-                        small: 2,
-                        tablet: 2,
-                        desktop: 3
+                        sm: 2,
+                        md: 2,
+                        lg: 3,
+                        '2xl': 3
                     }}
                 >
                     {rooms.map((room, index) => (

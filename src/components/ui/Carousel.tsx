@@ -18,12 +18,23 @@ interface CarouselProps {
     autoplay?: boolean;
     autoplayDelay?: number;
     speed?: number;
-    gap?: number;
-    slidesPerView?: {
-        small: number;
+    gap?: number | {
         mobile?: number;
-        tablet?: number;
-        desktop?: number;
+        sm?: number;
+        md?: number;
+        lg?: number;
+        xl?: number;
+        '2xl'?: number;
+        '3xl'?: number;
+    };
+    slidesPerView?: {
+        mobile?: number;
+        sm?: number;
+        md?: number;
+        lg?: number;
+        xl?: number;
+        '2xl'?: number;
+        '3xl'?: number;
     };
     offset?: {
         left?: number;
@@ -44,9 +55,10 @@ export default function Carousel({
     gap = 20,
     slidesPerView = {
         mobile: 1,
-        small: 2,
-        tablet: 2,
-        desktop: 3,
+        sm: 2,
+        md: 2,
+        lg: 3,
+        '2xl': 3,
     },
     offset = {
         left: 0,
@@ -58,20 +70,64 @@ export default function Carousel({
     const childrenArray = Array.isArray(children) ? children : [children];
     const totalSlides = childrenArray.length;
 
-    // Build breakpoints for Swiper
-    const breakpoints: Record<number, { slidesPerView: number }> = {};
+    // Helper to get gap value
+    const getGap = (bp: 'mobile' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl') => {
+        if (typeof gap === 'number') return gap;
+        return gap[bp] !== undefined ? gap[bp] : (gap.mobile || 20);
+    };
 
-    if (slidesPerView.mobile) {
-        breakpoints[0] = { slidesPerView: slidesPerView.mobile };
+    const initialGap = typeof gap === 'number' ? gap : (gap.mobile || 20);
+
+    // Build breakpoints for Swiper
+    const breakpoints: Record<number, { slidesPerView?: number; spaceBetween?: number }> = {};
+
+    // Helper to merge breakpoint config
+    const addBreakpoint = (width: number, config: { slidesPerView?: number; spaceBetween?: number }) => {
+        if (!breakpoints[width]) breakpoints[width] = {};
+        Object.assign(breakpoints[width], config);
+    };
+
+    if (slidesPerView.mobile || (typeof gap !== 'number' && gap.mobile)) {
+        addBreakpoint(0, {
+            slidesPerView: slidesPerView.mobile,
+            spaceBetween: getGap('mobile')
+        });
     }
-    if (slidesPerView.small) {
-        breakpoints[640] = { slidesPerView: slidesPerView.small };
+    if (slidesPerView.sm || (typeof gap !== 'number' && gap.sm)) {
+        addBreakpoint(640, {
+            slidesPerView: slidesPerView.sm,
+            spaceBetween: getGap('sm')
+        });
     }
-    if (slidesPerView.tablet) {
-        breakpoints[768] = { slidesPerView: slidesPerView.tablet };
+    if (slidesPerView.md || (typeof gap !== 'number' && gap.md)) {
+        addBreakpoint(768, {
+            slidesPerView: slidesPerView.md,
+            spaceBetween: getGap('md')
+        });
     }
-    if (slidesPerView.desktop) {
-        breakpoints[1024] = { slidesPerView: slidesPerView.desktop };
+    if (slidesPerView.lg || (typeof gap !== 'number' && gap.lg)) {
+        addBreakpoint(1024, {
+            slidesPerView: slidesPerView.lg,
+            spaceBetween: getGap('lg')
+        });
+    }
+    if (slidesPerView.xl || (typeof gap !== 'number' && gap.xl)) {
+        addBreakpoint(1280, {
+            slidesPerView: slidesPerView.xl,
+            spaceBetween: getGap('xl')
+        });
+    }
+    if (slidesPerView['2xl'] || (typeof gap !== 'number' && gap['2xl'])) {
+        addBreakpoint(1440, {
+            slidesPerView: slidesPerView['2xl'],
+            spaceBetween: getGap('2xl')
+        });
+    }
+    if (slidesPerView['3xl'] || (typeof gap !== 'number' && gap['3xl'])) {
+        addBreakpoint(1920, {
+            slidesPerView: slidesPerView['3xl'],
+            spaceBetween: getGap('3xl')
+        });
     }
 
     // Calculate max slides per view to determine if loop should be enabled
@@ -92,10 +148,11 @@ export default function Carousel({
                     onSwiperInit?.(swiper);
                 }}
                 modules={[Navigation, Pagination, ...(autoplay ? [Autoplay] : [])]}
-                spaceBetween={gap}
+                spaceBetween={initialGap}
                 slidesPerView={slidesPerView.mobile || 1}
                 slidesPerGroup={1}
                 loop={loop !== undefined ? loop : enableLoop}
+                centeredSlides={false}
                 speed={speed * 1000}
                 autoplay={
                     autoplay
