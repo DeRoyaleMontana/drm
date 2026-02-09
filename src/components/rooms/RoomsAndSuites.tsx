@@ -84,7 +84,7 @@ const RoomCard = ({ room, index, svgColor = "accent" }: RoomCardProps) => {
       <h3 className={`f-h2 font-display ${textColor} font-medium`}>{room.title}</h3>
       <div className="flex justify-start items-center gap-x-3 3xl:gap-x-4 z-10">
         <PeopleIcon svgColor={svgColor} className="w-4 xl:w-5 3xl:w-6 h-4 xl:h-5 3xl:h-6" />
-        <h6 className="text-xs mmd:text-sm xl:text-base 3xl:text-xl text-accent font-mona uppercase font-semibold">{room.capacity}</h6>
+        <h6 className="text-xs mmd:text-sm xl:text-base 3xl:text-xl text-accent font-body uppercase font-semibold">{room.capacity}</h6>
       </div>
       <p className={`f-body leading-normal ${textColor} font-body sm:text-justify`}>{room.description}</p>
       <Button

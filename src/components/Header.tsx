@@ -5,7 +5,7 @@ const menuItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Explore", href: "/explore" },
-    { label: "Wedding", href: "#" },
+    { label: "Wedding", href: "/wedding" },
     { label: "Restaurants", href: "#" },
     { label: "Events", href: "#" },
 ];
