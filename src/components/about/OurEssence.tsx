@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function OurEssence() {
     return (
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 fp">
@@ -12,7 +14,15 @@ export default function OurEssence() {
                     <p> Here, the line between the indoors and outdoors blurs — as the lush mountainscapes pour into your windows, and the scent of fresh earth mingles with fine linen. It&apos;s not just where you stay; it&apos;s where your soul unwinds.</p>
                 </div>
             </div>
-            <div className="w-full lg:w-[45%] h-[250px] md:h-[373px] lg:h-auto bg-[url('/images/about/essence.webp')] bg-cover bg-center "></div>
+            <div className="relative w-full lg:w-[45%] h-[250px] md:h-[373px] lg:h-auto">
+                <Image
+                    src="/images/about/essence.webp"
+                    alt="Our Essence"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 45vw"
+                />
+            </div>
 
         </div>
     );

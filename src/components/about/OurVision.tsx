@@ -17,7 +17,15 @@ export default function OurVision() {
                             To be South India&apos;s most cherished luxury escape, seamlessly blending regal comfort with the untamed beauty of the Ghats — where guests rediscover what it means to truly relax, reconnect, and rejuvenate.
                         </p>
                     </div>
-                    <div className="w-full md:w-[50%] lg:w-[40%] h-[223px] md:h-auto  bg-[url('/images/about/our-vision.webp')] bg-cover bg-center "></div>
+                    <div className="relative w-full md:w-[50%] lg:w-[40%] h-[223px] md:h-auto">
+                        <Image
+                            src="/images/about/our-vision.webp"
+                            alt="Our Vision"
+                            fill
+                            className="object-cover object-center"
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                        />
+                    </div>
 
                 </div>
                 {/* End of Inner Row 1 */}
@@ -26,7 +34,15 @@ export default function OurVision() {
 
                 {/* Inner Row 2 */}
                 <div className="flex flex-col-reverse md:flex-row gap-10 xl:gap-20 3xl:gap-29">
-                    <div className="w-full md:w-[50%] lg:w-[40%] h-[223px] md:h-auto  bg-[url('/images/about/our-mission.webp')] bg-cover bg-center "></div>
+                    <div className="relative w-full md:w-[50%] lg:w-[40%] h-[223px] md:h-auto">
+                        <Image
+                            src="/images/about/our-mission.webp"
+                            alt="Our Mission"
+                            fill
+                            className="object-cover object-center"
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                        />
+                    </div>
                     <div className="w-full md:w-[50%] lg:w-[60%] flex flex-col items-start md:items-end gap-8 3xl:gap-14 ">
                         <div className="w-full flex flex-col items-end gap-6 3xl:gap-10">
                             <h3 className="f-h2 font-display font-medium tracking-wide">Our Mission</h3>
@@ -58,7 +74,7 @@ export default function OurVision() {
                     <h4 className="f-h4 text-center italic font-light">&quot;To make every guest feel like royalty — naturally.&quot;</h4>
 
                 </div>
-                <Image className="w-[910px] h-[250px] sm:h-[370px] 2xl:h-[558px] object-cover object-center" src="/images/about/simple.webp" alt="" width={910} height={558} />
+                <Image className="w-full max-w-[910px] h-[250px] sm:h-[370px] 2xl:h-[558px] object-cover object-center" src="/images/about/simple.webp" alt="Our Mission Simple" width={910} height={558} />
             </div>
             {/* End of Row 2 */}
         </section>

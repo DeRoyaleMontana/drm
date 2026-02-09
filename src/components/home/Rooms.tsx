@@ -63,7 +63,7 @@ const RoomCard = ({ room, className = "" }: { room: typeof rooms[0], className?:
     </div>
 );
 
-export default function Rooms2() {
+export default function Rooms() {
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
     const HeaderBlock = () => (

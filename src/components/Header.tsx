@@ -4,7 +4,7 @@ import Link from 'next/link';
 const menuItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Explore", href: "#" },
+    { label: "Explore", href: "/explore" },
     { label: "Wedding", href: "#" },
     { label: "Restaurants", href: "#" },
     { label: "Events", href: "#" },
@@ -26,9 +26,7 @@ export default function Header() {
                         {/* End of Hamburger Menu Line */}
 
                         {/* Menu text */}
-                        <div className="">
-                            Rooms
-                        </div>
+                        <Link href="/rooms" className="">Rooms</Link>
                         {/* End of Menu text */}
                     </div>
                     {/* End of Hamburger Menu */}

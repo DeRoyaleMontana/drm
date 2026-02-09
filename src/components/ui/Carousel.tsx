@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, ReactNode } from "react";
+import { useRef, ReactNode, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -40,8 +40,11 @@ interface CarouselProps {
         left?: number;
         right?: number;
     };
-    onSwiperInit?: (swiper: SwiperType) => void;
     loop?: boolean;
+    /** Callback when Swiper is initialized - use this for external pagination */
+    onSwiperInit?: (swiper: SwiperType) => void;
+    /** Callback when slide changes - use this for external pagination */
+    onSlideChange?: (activeIndex: number) => void;
 }
 
 export default function Carousel({
@@ -64,71 +67,62 @@ export default function Carousel({
         left: 0,
         right: 0,
     },
-    onSwiperInit,
     loop,
+    onSwiperInit,
+    onSlideChange,
 }: CarouselProps) {
-    const childrenArray = Array.isArray(children) ? children : [children];
+    const childrenArray = useMemo(() => Array.isArray(children) ? children : [children], [children]);
     const totalSlides = childrenArray.length;
 
     // Helper to get gap value
     const getGap = (bp: 'mobile' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl') => {
         if (typeof gap === 'number') return gap;
-        return gap[bp] !== undefined ? gap[bp] : (gap.mobile || 20);
+        return gap?.[bp] || 20;
     };
+
+    const breakpoints = useMemo(() => {
+        const bp: Record<number, { slidesPerView?: number; spaceBetween?: number }> = {};
+
+        if (slidesPerView.mobile) {
+            bp[0] = { slidesPerView: slidesPerView.mobile, spaceBetween: getGap('mobile') };
+        }
+        if (slidesPerView.sm) {
+            bp[640] = { slidesPerView: slidesPerView.sm, spaceBetween: getGap('sm') };
+        }
+        if (slidesPerView.md) {
+            bp[768] = { slidesPerView: slidesPerView.md, spaceBetween: getGap('md') };
+        }
+        if (slidesPerView.lg) {
+            bp[1024] = { slidesPerView: slidesPerView.lg, spaceBetween: getGap('lg') };
+        }
+        if (slidesPerView.xl) {
+            bp[1280] = { slidesPerView: slidesPerView.xl, spaceBetween: getGap('xl') };
+        }
+        if (slidesPerView['2xl']) {
+            bp[1440] = { slidesPerView: slidesPerView['2xl'], spaceBetween: getGap('2xl') };
+        }
+        if (slidesPerView['3xl']) {
+            bp[1920] = { slidesPerView: slidesPerView['3xl'], spaceBetween: getGap('3xl') };
+        }
+        return bp;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        slidesPerView.mobile, slidesPerView.sm, slidesPerView.md,
+        slidesPerView.lg, slidesPerView.xl, slidesPerView['2xl'], slidesPerView['3xl'],
+        gap
+    ]);
+
+    const modules = useMemo(() => [Navigation, Pagination, ...(autoplay ? [Autoplay] : [])], [autoplay]);
+
+    const autoplayConfig = useMemo(() => autoplay
+        ? {
+            delay: autoplayDelay,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: false,
+        }
+        : false, [autoplay, autoplayDelay]);
 
     const initialGap = typeof gap === 'number' ? gap : (gap.mobile || 20);
-
-    // Build breakpoints for Swiper
-    const breakpoints: Record<number, { slidesPerView?: number; spaceBetween?: number }> = {};
-
-    // Helper to merge breakpoint config
-    const addBreakpoint = (width: number, config: { slidesPerView?: number; spaceBetween?: number }) => {
-        if (!breakpoints[width]) breakpoints[width] = {};
-        Object.assign(breakpoints[width], config);
-    };
-
-    if (slidesPerView.mobile || (typeof gap !== 'number' && gap.mobile)) {
-        addBreakpoint(0, {
-            slidesPerView: slidesPerView.mobile,
-            spaceBetween: getGap('mobile')
-        });
-    }
-    if (slidesPerView.sm || (typeof gap !== 'number' && gap.sm)) {
-        addBreakpoint(640, {
-            slidesPerView: slidesPerView.sm,
-            spaceBetween: getGap('sm')
-        });
-    }
-    if (slidesPerView.md || (typeof gap !== 'number' && gap.md)) {
-        addBreakpoint(768, {
-            slidesPerView: slidesPerView.md,
-            spaceBetween: getGap('md')
-        });
-    }
-    if (slidesPerView.lg || (typeof gap !== 'number' && gap.lg)) {
-        addBreakpoint(1024, {
-            slidesPerView: slidesPerView.lg,
-            spaceBetween: getGap('lg')
-        });
-    }
-    if (slidesPerView.xl || (typeof gap !== 'number' && gap.xl)) {
-        addBreakpoint(1280, {
-            slidesPerView: slidesPerView.xl,
-            spaceBetween: getGap('xl')
-        });
-    }
-    if (slidesPerView['2xl'] || (typeof gap !== 'number' && gap['2xl'])) {
-        addBreakpoint(1440, {
-            slidesPerView: slidesPerView['2xl'],
-            spaceBetween: getGap('2xl')
-        });
-    }
-    if (slidesPerView['3xl'] || (typeof gap !== 'number' && gap['3xl'])) {
-        addBreakpoint(1920, {
-            slidesPerView: slidesPerView['3xl'],
-            spaceBetween: getGap('3xl')
-        });
-    }
 
     // Calculate max slides per view to determine if loop should be enabled
     const maxSlidesPerView = Math.max(
@@ -141,28 +135,23 @@ export default function Carousel({
     const swiperRef = useRef<SwiperType | null>(null);
 
     return (
-        <div className={`relative  ${className}`}>
+        <div className={`relative ${className}`}>
             <Swiper
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper;
                     onSwiperInit?.(swiper);
                 }}
-                modules={[Navigation, Pagination, ...(autoplay ? [Autoplay] : [])]}
+                onSlideChange={(swiper) => {
+                    onSlideChange?.(swiper.realIndex);
+                }}
+                modules={modules}
                 spaceBetween={initialGap}
                 slidesPerView={slidesPerView.mobile || 1}
                 slidesPerGroup={1}
                 loop={loop !== undefined ? loop : enableLoop}
                 centeredSlides={false}
                 speed={speed * 1000}
-                autoplay={
-                    autoplay
-                        ? {
-                            delay: autoplayDelay,
-                            disableOnInteraction: false,
-                            pauseOnMouseEnter: false,
-                        }
-                        : false
-                }
+                autoplay={autoplayConfig}
                 navigation={false}
                 pagination={
                     showPagination && totalSlides > (slidesPerView.mobile || 1)

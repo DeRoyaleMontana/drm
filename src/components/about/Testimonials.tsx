@@ -5,6 +5,7 @@ import { QuoteIcon, LeftArrowIcon, RightArrowIcon } from "@/components/icons";
 import { SvgColorProps } from "@/utils/svgColor";
 import Carousel from "@/components/ui/Carousel";
 import type { Swiper as SwiperType } from "swiper";
+import Divider from "../ui/Divider";
 
 interface Testimonial {
     id: number;
@@ -40,8 +41,8 @@ interface TestimonialCardProps extends SvgColorProps {
 }
 
 const TestimonialCard = ({ testimonial, svgColor = "primary" }: TestimonialCardProps) => (
-    <div className="flex flex-col gap-6 xl:gap-9">
-        {/* First Row */}
+    <div className="flex flex-col gap-6 xl:gap-9 items-center">
+
         <div className="flex flex-col gap-9 bg-secondary p-9">
             {/* Inner First Row */}
             <div className="flex flex-col gap-6">
@@ -57,14 +58,12 @@ const TestimonialCard = ({ testimonial, svgColor = "primary" }: TestimonialCardP
             </div>
             {/* End of Inner Second Row */}
         </div>
-        {/* End of First Row */}
 
-        {/* Second Row */}
-        <div className="flex flex-col items-center gap-y-3">
-            <div className="w-[80%] xl:w-[90%] h-px bg-secondary"></div>
-            <div className="w-[80%] xl:w-[90%] h-1 bg-secondary"></div>
-        </div>
-        {/* End of Second Row */}
+
+
+
+        <Divider dividerColor="bg-secondary" className="w-[80%] xl:w-[90%]" />
+
     </div>
 );
 
