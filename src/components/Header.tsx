@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 const menuItems = [
@@ -6,7 +5,7 @@ const menuItems = [
     { label: "About", href: "/about" },
     { label: "Explore", href: "/explore" },
     { label: "Wedding", href: "/wedding" },
-    { label: "Restaurants", href: "#" },
+    { label: "Restaurants", href: "/restaurants" },
     { label: "Events", href: "#" },
 ];
 
