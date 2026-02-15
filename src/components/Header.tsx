@@ -1,3 +1,6 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import Link from 'next/link';
 
 const menuItems = [
@@ -10,8 +13,11 @@ const menuItems = [
 ];
 
 export default function Header() {
+    const pathname = usePathname();
+    const isContactPage = pathname === "/contact-us";
+
     return (
-        <header className="bg-secondary/10 backdrop-blur-xl absolute top-0 left-0 right-0 z-50 font-body font-normal text-xxs mlg:text-xs sm:text-sm 3xl:text-lg tracking-widest text-ivory border-b-[0.5px] border-secondary uppercase">
+        <header className={`${isContactPage ? "relative bg-primary" : "absolute bg-secondary/10 backdrop-blur-xl"} top-0 left-0 right-0 z-50 font-body font-normal text-xxs mlg:text-xs sm:text-sm 3xl:text-lg tracking-widest text-ivory border-b-[0.5px] border-secondary uppercase`}>
             <div className="flex justify-between fpx">
 
                 <div className="flex divide-x-[0.5px] divide-secondary ">
@@ -47,7 +53,7 @@ export default function Header() {
                             </Link>
                         ))}
                     </nav>
-                    <button className="bg-secondary/30 text-secondary px-4 md:px-8 py-2 md:py-3.5 3xl:py-4 rounded-full uppercase">Contact</button>
+                    <Link href="/contact-us" className="bg-secondary/30 text-secondary px-4 md:px-8 py-2 md:py-3.5 3xl:py-4 rounded-full uppercase">Contact</Link>
                 </div>
 
             </div>

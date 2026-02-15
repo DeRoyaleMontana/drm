@@ -42,12 +42,12 @@ export default function ScrollZoomImage({
     if (backgroundSelector) {
       imageElement = container.querySelector<HTMLElement>(backgroundSelector);
     } else {
-      // Find first element with background image
+      // Find first element with background image or is an IMG tag
       const allElements = container.querySelectorAll('*');
       for (const el of allElements) {
         const htmlEl = el as HTMLElement;
         const bgImage = window.getComputedStyle(htmlEl).backgroundImage;
-        if (bgImage && bgImage !== 'none') {
+        if ((bgImage && bgImage !== 'none') || htmlEl.tagName === 'IMG') {
           imageElement = htmlEl;
           break;
         }
