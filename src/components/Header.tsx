@@ -9,7 +9,7 @@ const menuItems = [
     { label: "Explore", href: "/explore" },
     { label: "Wedding", href: "/wedding" },
     { label: "Restaurants", href: "/restaurants" },
-    { label: "Events", href: "#" },
+    { label: "Events", href: "/events" },
 ];
 
 export default function Header() {

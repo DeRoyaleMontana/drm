@@ -30,7 +30,7 @@ export default function AboutUs({ svgColor = "primary" }: SecondProps) {
                         className="object-cover object-center"
                         sizes="(max-width: 1024px) 100vw, 55vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40 z-10"></div>
+                    <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/40 z-10"></div>
                 </div>
             </div>
             {/* End of Row 2 */}

@@ -20,13 +20,16 @@ export default function RightArrowIcon({
     const finalBgColor = bgColor ? getColorValue(bgColor, "#FFFBF4") : getColorValue(svgColor, "#FFFBF4");
     const finalArrowColor = arrowColor ? getColorValue(arrowColor, "#182B21") : getColorValue("primary", "#182B21");
 
+    const useDefaultSize = !width && !height && !className?.match(/\b(w-|h-)/);
+    const sizeClasses = useDefaultSize ? "w-10 h-10 lg:w-12 lg:h-12 2xl:w-14 2xl:h-14 3xl:w-16 3xl:h-16" : "";
+
     return (
         <svg
             width={width}
             height={height}
             viewBox="0 0 64 64"
             fill="none"
-            className={`w-10 h-10 lg:w-12 lg:h-12 2xl:w-14 2xl:h-14 3xl:w-16 3xl:h-16 ${className || ''}`}
+            className={`${sizeClasses} ${className || ''}`}
         >
             <foreignObject x="-60" y="-60" width="184" height="184">
                 <div
