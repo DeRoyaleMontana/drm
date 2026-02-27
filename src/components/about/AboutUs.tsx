@@ -18,10 +18,10 @@ export default function AboutUs({ svgColor = "primary" }: SecondProps) {
 
             {/* Row 2 */}
             <div className=" flex flex-col lg:flex-row gap-8 lg:gap-12 3xl:gap-16 ">
-                <p className="w-full lg:w-[45%] flex flex-col gap-4 2xl:gap-6 3xl:gap-8 f-body font-light text-justify leading-normal">
-                    <div>Welcome to De Royale Montana, where sophistication meets serenity, and every stay tells a story. Tucked away in the sacred landscapes of Subramanya, our estate is not merely a destination — it is an experience. Inspired by the untouched beauty of nature and driven by a commitment to excellence, we offer a rare blend of curated luxury, heartfelt hospitality, and tranquil design.</div>
-                    <div>Whether you seek a restful escape or a celebratory gathering, De Royale Montana redefines the idea of leisure — with refined interiors, personalized service, and views that take your breath away.</div>
-                </p>
+                <div className="w-full lg:w-[45%] flex flex-col gap-4 2xl:gap-6 3xl:gap-8 f-body font-light text-justify leading-normal">
+                    <p>Welcome to De Royale Montana, where sophistication meets serenity, and every stay tells a story. Tucked away in the sacred landscapes of Subramanya, our estate is not merely a destination — it is an experience. Inspired by the untouched beauty of nature and driven by a commitment to excellence, we offer a rare blend of curated luxury, heartfelt hospitality, and tranquil design.</p>
+                    <p>Whether you seek a restful escape or a celebratory gathering, De Royale Montana redefines the idea of leisure — with refined interiors, personalized service, and views that take your breath away.</p>
+                </div>
                 <div className="relative w-full lg:w-[55%] h-[250px] sm:h-[390px] lg:h-auto">
                     <Image
                         src="/images/about/about.webp"
