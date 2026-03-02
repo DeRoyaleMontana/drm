@@ -10,31 +10,31 @@ const quickLinks = [
     },
     {
         title: "About",
-        href: "#",
+        href: "/about",
     },
     {
         title: "Rooms",
-        href: "#",
+        href: "/rooms",
     },
     {
         title: "Restaurants",
-        href: "#",
+        href: "/restaurants",
     },
     {
         title: "Blogs",
-        href: "#",
+        href: "/blogs",
     },
     {
         title: "Wedding Space",
-        href: "#",
+        href: "/wedding",
     },
     {
         title: "Events",
-        href: "#",
+        href: "/events",
     },
     {
         title: "Contact Us",
-        href: "#",
+        href: "/contact-us",
     },
 ];
 

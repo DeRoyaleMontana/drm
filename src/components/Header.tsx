@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSmoothScroll } from "@/context/SmoothScrollContext";
+import { useRouter } from "next/navigation";
+
+
 
 const menuItems = [
     { label: "Home", href: "/" },
@@ -16,8 +19,9 @@ const menuItems = [
 ];
 
 export default function Header() {
+    const router = useRouter();
     const pathname = usePathname();
-    const isRelativePage = pathname === "/contact-us" || (pathname.startsWith("/blog/") && pathname !== "/blog");
+    const isRelativePage = pathname === "/contact-us" || (pathname.startsWith("/blogs/") && pathname !== "/blogs");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { lenis } = useSmoothScroll();
 
@@ -45,14 +49,13 @@ export default function Header() {
                 <div className="flex justify-between fpx">
 
                     <div className="flex">
-                        {/* Hamburger Menu */}
-                        <div className="flex items-center gap-3 sm:gap-4 pr-3 md:pr-7 py-3 sm:py-6 2xl:py-5 3xl:py-6 group cursor-pointer z-90 relative" onClick={toggleMenu}>
+                        {/* Mobile Hamburger Menu (< 1024px) */}
+                        <div className="flex xl:hidden items-center gap-3 sm:gap-4 pr-3 md:pr-7 py-3 sm:py-6 2xl:py-5 3xl:py-6 group cursor-pointer z-90 relative" onClick={toggleMenu}>
                             {/* Hamburger Menu Line */}
-                            <div className="flex flex-col items-end gap-1.5 sm:gap-2 3xl:gap-2.5">
-                                <span className={`w-6 sm:w-8 3xl:w-10 h-px bg-secondary block rounded-full transition-transform duration-300`}></span>
-                                <span className={`w-6 sm:w-8 3xl:w-10 group-hover:w-6 h-px bg-secondary block rounded-full transition-all duration-300`}></span>
+                            <div className="flex flex-col items-end gap-1.5 sm:gap-2">
+                                <span className="w-6 sm:w-8 h-px bg-secondary block rounded-full transition-transform duration-300"></span>
+                                <span className="w-6 sm:w-8 group-hover:w-6 h-px bg-secondary block rounded-full transition-all duration-300"></span>
                             </div>
-                            {/* End of Hamburger Menu Line */}
 
                             {/* Menu text */}
                             <div className="relative overflow-clip h-4 sm:h-5 leading-1.8 3xl:leading-tight">
@@ -65,7 +68,26 @@ export default function Header() {
                             </div>
                             {/* End of Menu text */}
                         </div>
-                        {/* End of Hamburger Menu */}
+
+                        {/* Desktop Rooms Link (>= 1024px) */}
+                        <Link href="/rooms" className="hidden xl:flex items-center gap-3 pr-7 py-3 2xl:py-5 3xl:py-6 group cursor-pointer z-90 relative" onClick={() => { if (isMenuOpen) setIsMenuOpen(false); }}>
+                            {/* Rooms Icon Lines (Stylized differently or same as menu but static) */}
+                            <div className="flex flex-col items-end gap-1.5 3xl:gap-2.5">
+                                <span className="w-8 3xl:w-10 h-px bg-secondary block rounded-full transition-transform duration-300"></span>
+                                <span className="w-8 3xl:w-10 group-hover:w-6 h-px bg-secondary block rounded-full transition-all duration-300"></span>
+                            </div>
+
+                            {/* Rooms Text */}
+                            <div className="relative overflow-hidden  leading-tight flex flex-col justify-start">
+                                <div className="transform-3d group-hover:transform-[translateY(-100%)] transition-all duration-300 ease-in-out">
+                                    Rooms
+                                </div>
+                                <div className="absolute top-full group-hover:transform-[translateY(-100%)] transition-all duration-300 ease-in-out">
+                                    Rooms
+                                </div>
+                            </div>
+                        </Link>
+                        {/* End of Left Side UI */}
 
                         {/* Logo */}
                         <div className="pl-3 md:pl-7 py-3  2xl:py-5 3xl:py-6 z-10 relative border-l-[0.5px] border-secondary">
@@ -84,7 +106,12 @@ export default function Header() {
                                 </Link>
                             ))}
                         </nav>
-                        <Link href="/contact-us" className="bg-secondary/30 text-secondary px-4 md:px-8 py-2 md:py-3.5 3xl:py-4 rounded-full uppercase">Contact</Link>
+                        <button onClick={() => router.push("/contact-us")} className="bg-secondary/30 text-secondary px-4 md:px-8 py-2 md:py-3.5 3xl:py-4 rounded-full uppercase group">
+                            <div className="relative overflow-hidden">
+                                <div className="transform-3d group-hover:transform-[translateY(-100%)] transition-all duration-300 ease-in-out  z-10">Contact</div>
+                                <div className="absolute top-full group-hover:transform-[translateY(-100%)] transition-all duration-300 ease-in-out  z-10 ">Contact</div>
+                            </div>
+                        </button>
                     </div>
 
                 </div>
@@ -95,7 +122,12 @@ export default function Header() {
 
                         <div className="flex flex-col items-center gap-10 2xl:gap-12 3xl:gap-16 uppercase z-10 relative">
                             {menuItems.map((item) => (
-                                <Link key={item.label} href={item.href} className="leading-none transition-colors flex flex-col gap-2 group ">
+                                <Link
+                                    key={item.label}
+                                    href={item.href}
+                                    className="leading-none transition-colors flex flex-col gap-2 group"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
                                     {item.label}
                                     <span className="block w-full h-px bg-secondary scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-right group-hover:origin-left"></span>
                                 </Link>

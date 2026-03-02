@@ -40,7 +40,7 @@ export default async function BlogDetail({ params }: { params: { slug: string } 
             <header className="flex flex-col gap-4 lg:gap-6 2xl:gap-9">
                 {/* Breadcrumb */}
                 <div className="flex items-center gap-2 text-xs sm:text-sm md:text-base 3xl:text-xl">
-                    <Link href="/blog" className="text-accent hover:text-accent/50 transition-colors">Back</Link>
+                    <Link href="/blogs" className="text-accent hover:text-accent/50 transition-colors">Back</Link>
                     <span className="text-accent">/</span>
                     <span className="text-primary font-semibold">Blogs</span>
                 </div>

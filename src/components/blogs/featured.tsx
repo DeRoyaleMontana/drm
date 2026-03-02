@@ -43,7 +43,7 @@ export default function Featured({ post }: FeaturedProps) {
                 showIcon={true}
                 iconClassName="fill-accent"
                 className='justify-self-center md:justify-self-start lg:col-start-2 lg:col-span-2 order-4'
-                onClick={() => router.push(`/blog/${post.slug}`)}
+                onClick={() => router.push(`/blogs/${post.slug}`)}
             />
 
 

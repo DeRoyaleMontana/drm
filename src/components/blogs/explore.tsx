@@ -130,7 +130,7 @@ export default function Explore({ posts = [] }: ExploreProps) {
 
                                     {/* Read More Button */}
                                     <button
-                                        onClick={() => router.push(`/blog/${post.slug}`)}
+                                        onClick={() => router.push(`/blogs/${post.slug}`)}
                                         className="text-xxs mlg:text-xs xl:text-sm 3xl:text-lg bg-accent text-secondary uppercase px-6 py-4 rounded-full w-full mt-auto"
                                     >
                                         Read More

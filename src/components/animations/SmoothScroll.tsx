@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -43,6 +44,14 @@ function SmoothScrollContent({ children }: { children: React.ReactNode }) {
             setLenis(null); // Cleanup
         };
     });
+
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (lenisRef.current) {
+            lenisRef.current.scrollTo(0, { immediate: true });
+        }
+    }, [pathname]);
 
     return (
         <div id="smooth-wrapper">
